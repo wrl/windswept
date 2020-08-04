@@ -1,0 +1,72 @@
+{
+  "_from": "@beyonk/svelte-notifications",
+  "_id": "@beyonk/svelte-notifications@2.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-eEFs2Nfg32AqZWlXvetqp3fiKDJFgReqI82kHlQUxb07r1I0DAJ4FmuO3ni2p6SyXQwK4rW0grestEzgpqEiuw==",
+  "_location": "/@beyonk/svelte-notifications",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@beyonk/svelte-notifications",
+    "name": "@beyonk/svelte-notifications",
+    "escapedName": "@beyonk%2fsvelte-notifications",
+    "scope": "@beyonk",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/@beyonk/svelte-notifications/-/svelte-notifications-2.0.3.tgz",
+  "_shasum": "8578226ab578e57622f0cf5b57e88d1ec7df4545",
+  "_spec": "@beyonk/svelte-notifications",
+  "_where": "/home/wrl/dev/windswept/frontend",
+  "bugs": {
+    "url": "https://github.com/beyonk-adventures/svelte-notifications/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "<p align=\"center\">   <img width=\"186\" height=\"90\" src=\"https://user-images.githubusercontent.com/218949/44782765-377e7c80-ab80-11e8-9dd8-fce0e37c235b.png\" alt=\"Beyonk\" /> </p>",
+  "devDependencies": {
+    "rollup": "^1.16.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.4",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-svelte": "^5.1.0",
+    "svelte": "^3.12.1",
+    "typescript": "^3.5.2"
+  },
+  "files": [
+    "src",
+    "index.mjs",
+    "index.js"
+  ],
+  "homepage": "https://github.com/beyonk-adventures/svelte-notifications#readme",
+  "keywords": [
+    "svelte",
+    "notifications",
+    "toast",
+    "toastr",
+    "vanillajs",
+    "css",
+    "animation"
+  ],
+  "main": "index.js",
+  "module": "index.mjs",
+  "name": "@beyonk/svelte-notifications",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyonk-adventures/svelte-notifications.git"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "NODE_ENV=development rollup -cw",
+    "prepublishOnly": "npm run build"
+  },
+  "svelte": "src/index.js",
+  "version": "2.0.3"
+}

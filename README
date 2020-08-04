@@ -1,0 +1,56 @@
+
+                                       /       |
+    ::                      /       \
+     :::                   w i n d s w  e  p  t
+      ::::                /           \
+       :::::                       /           |
+        ::::::::::::::::::::::::::::::::::::
+           :::::::::::::::::::::::::::::::::::::
+
+
+        hello
+
+        windswept is a project/task management system. at the moment it is very
+        early in development and chiefly modelled after my own workflow and
+        peculiarities. i strongly recommend reading ./docs/background.txt for
+        some insight as to what said workflow and peculiarities entail.
+
+        the data model has been purposely kept simple so that it can be
+        customised andadapted for folks' individual workflows.
+
+        i hope you will find windswept useful.
+
+
+        you will need npm and cargo+rustc installed to run.
+
+        build the frontend first:
+
+            $ cd frontend
+            $ npm install
+            $ npm run build
+
+        then, build the backend:
+
+           $ cargo build
+
+        to run:
+
+           $ cargo run -- -h <host> -p <port> <path/to/json/storage/directory>
+
+        create the json storage directory before running windswept. the backend
+        will store `windswept.json` in this directory, which is used for
+        storage and synchronisation.
+
+        all changes to the tree are automatically saved to `windswept.json`
+        and synchronised/broadcasted to all connected clients.
+
+
+        in addition to `windswept.json`, a backup can be made at any time by
+        pressing `ctrl-s`. a little message will appear, and a dated backup
+        json file will be written to the json storage directory.
+
+        since windswept is still in very early stages and data loss is still a
+        strong possibility, you should take backups often.
+
+        take care, and fly safe.
+        -w

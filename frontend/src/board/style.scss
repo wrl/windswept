@@ -1,0 +1,189 @@
+@import "../style/variables";
+
+$kanban_card_width: 16rem;
+$kanban_column_bgcolor: $primary-color;
+$kanban_card_hover_bgcolor: lighten($kanban_column_bgcolor, 35%);
+
+:global(html), :global(body) {
+	height: 100%;
+}
+
+main {
+	padding-top: $unit-2;
+	width: 90%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+}
+
+div.kanban {
+	flex-basis: 100%;
+	align-self: stretch;
+	display: flex;
+}
+
+div.task-col {
+	background: $kanban_column_bgcolor;
+	padding-bottom: 0;
+	border: 0;
+
+	align-self: start;
+	border-radius: 4px;
+}
+
+div.task-col > header {
+	color: $light-color;
+	padding: 0.8rem;
+	margin-bottom: 0;
+	user-select: none;
+
+	font-weight: bold;
+	font-size: 14pt;
+
+	display: flex;
+	align-items: top;
+	justify-content: space-between;
+
+	max-width: $kanban_card_width + 1.6rem;
+}
+
+div.task-col > header > .title > :global(code) {
+	background: darken($kanban_column_bgcolor, 4%);
+	color: $light-color;
+}
+
+div.task-col:not(.collapsed) > header > .title {
+	margin-right: 1em;
+	flex-basis: 100%;
+}
+
+:not(.collapsed) > header {
+	flex-direction: row-reverse;
+}
+
+.collapsed > header {
+	flex-direction: column;
+}
+
+.collapsed > header > .title {
+	writing-mode: vertical-rl;
+	transform: rotate(-180deg);
+	margin-top: 0.9em;
+	width: 1.5em;
+}
+
+.collapsed:not(.has-children) > header > .title {
+	margin-top: 2.4em;
+}
+
+:global(div.kanban > :not(.being-dragged)) {
+	margin-right: 1rem;
+}
+
+:global(div.kanban > .being-dragged) {
+	box-shadow: 0 0.3rem 0.5rem 0.2rem $kanban_column_bgcolor;
+}
+
+div.task-col .panel-body {
+	padding-top: 0;
+	padding-bottom: 1rem;
+	min-height: 3rem;
+}
+
+div.task-col:not(.collapsed) .panel-body {
+	min-width: $kanban_card_width + 1.6rem;
+}
+
+div.task-col.collapsed :global(div.panel-body.drop_hover) {
+	min-width: $kanban_card_width / 2;
+}
+
+.kanban-card {
+	max-width: $kanban_card_width;
+	width: $kanban_card_width;
+
+	background: $light-color;
+
+	border: 0;
+	border-radius: 2px;
+	margin: 0;
+	margin-bottom: 0.7rem;
+	user-select: none;
+
+	padding: 0;
+	padding: 0.4rem;
+	padding-bottom: 1rem;
+}
+
+:global(.kanban-card:not(.being-dragged)) {
+	box-shadow: 0 0.1rem 0.3rem 0.1rem darken($kanban_column_bgcolor, 2%);
+}
+
+.kanban-card:hover {
+	background: $kanban_card_hover_bgcolor;
+}
+
+.kanban-card:hover:not(.being-dragged) {
+	box-shadow: 0 0.2rem 0.4rem 0.2rem darken($kanban_column_bgcolor, 4%);
+}
+
+:global(.kanban-card.being-dragged) {
+	box-shadow: 0 0.3rem 0.5rem 0.2rem darken($kanban_column_bgcolor, 4%);
+}
+
+div.task-col .card p {
+	margin: 0;
+}
+
+:global(div.kanban .placeholder) {
+	background: $gray-color;
+	box-shadow: 0 0 0.1rem 0.1rem $gray-color;
+	align-self: start;
+}
+
+$card_placeholder_color: darken($primary-color-dark, 1%);
+
+:global(div.panel-body .placeholder) {
+	width: 100%;
+	background: $card_placeholder_color;
+	border: 0;
+	border-radius: 5px;
+	margin-bottom: 0.7rem;
+	box-shadow: 0 0 0.3rem 0.1rem $card_placeholder_color;
+}
+
+$control_size: 1.1em;
+
+div.control {
+	height: 1.5em;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.collapsed button.control {
+	margin-top: 0.09rem;
+}
+
+button.control {
+	border: 0;
+	padding: 0;
+	margin: 0;
+
+	background: transparent;
+
+	color: $light-color;
+	opacity: 0.4;
+
+	width: $control_size * 1.5;
+	height: $control_size * 1.5;
+
+	padding: ($control_size / 4) ($control_size / 2);
+
+	cursor: pointer;
+}
+
+button.control:hover {
+	opacity: 0.9;
+}

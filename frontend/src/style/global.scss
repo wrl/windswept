@@ -1,0 +1,51 @@
+/**
+ * windswept: task management for the ambitious
+ * Copyright (C) 2020 William Light
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+@import "variables";
+@import "node_modules/spectre.css/src/spectre";
+
+input {
+	border-style: solid;
+}
+
+body {
+	overflow-y: scroll;
+	overflow-x: auto;
+}
+
+ul.task_list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.done {
+	color: lighten($body-font-color, 58%);
+}
+
+.done a {
+	color: lighten($link-color, 28%);
+}
+
+.done code {
+	color: lighten($primary-color, 30%);
+}
+
+body.hide-done-tasks .kanban .done {
+	display: none;
+}

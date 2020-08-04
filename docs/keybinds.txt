@@ -1,0 +1,244 @@
+
+                                       /       |
+    ::                      /       \
+     :::                     \ / \ \ / \ / \ / \
+      ::::                /           \
+       :::::                       /           |
+        ::::::::::::::::::::::::::::::::::::
+           :::::::::::::::::::::::::::::::::::::
+
+
+        windswept's interaction model takes heavy inspiration from modal
+        editors such as vi, and as such the keyboard is an indispensible part
+        of the user interface.
+
+        let's talk about editing modes.
+
+        windswept has both an edit mode and a navigation mode, which have
+        parallels to vi's insert mode and normal mode. in navigation mode, the
+        commands are chiefly concerned with moving around the tree and
+        modifying it as need be. edit mode is about editing the text of the
+        tasks.
+
+        windswept starts in navigation mode.
+
+        here are keystrokes that work both in edit and insert mode:
+
+
+            Enter       adds a new task and then switches to edit mode for
+                        editing the task summary text. the summary text is,
+                        roughly, the short form of the task. things like "buy a
+                        succulent", or "take out the milk", or "produce
+                        antimatter".
+
+                        with the "root" task selected, Enter adds a task as the
+                        root's first subtask.
+
+                        if the selected task has children already, Enter adds
+                        the new task as the first child of the selected task.
+                        otherwise, Enter adds a new sibling task directly after
+                        the selected task.
+
+                        since `Enter` works both in edit and navigation modes,
+                        it's a great quick way to rattle off a whole list of
+                        tasks in one go. just keep typing.
+
+            Backspace   if the currently selected task has an empty summary
+                        field, the task will be deleted, and its children will
+                        take its place.
+
+                        `Backspace` always returns to navigation mode.
+
+                        i find this one particularly useful if i go one too far
+                        when listing off tasks and pressing `Enter` after each.
+                        if it turns out I don't need any more, i just tap
+                        `Backspace` at the empty summary prompt.
+
+            Alt-Enter   adds a new task as the currently selected task's first
+                        subtask. if the task already has subtasks, they will be
+                        moved down to make room.
+
+            Shift-Enter edits the "exposition" of the task. sometimes called
+                        the "description", this is a free-form block of text
+                        which can be used to provide additional context on the
+                        task in question.
+
+                        note that, when editing the exposition, `Enter` works
+                        to insert a regular line break, and does not perform
+                        the above action of adding a new task below the one
+                        being edited.
+
+                        to perform this new-task-adding from the exposition,
+                        press `Ctrl-Enter`.
+
+            Ctrl-Up     moves the selected task up by one inside its parent.
+
+            Ctrl-Down   as above, but moves the dask down by one.
+
+            Tab         reparents the task under its above sibling, effectively
+                        increasing the "indentation" amount.
+
+            Shift-Tab   opposite of `Tab`.
+
+            Shift-Up    moves the task up by one inside of its current parent.
+
+            Shift-Down  as above, but moves the task down by one.
+
+
+        to get out of edit mode back to navigation mode, use one of the
+        following bindings:
+
+
+            Escape      exits edit mode and returns to navigation mode. when
+                        pressed in navigation mode, clears the current task
+                        selection.
+
+            Ctrl-[      as above, but without the selection-clearing.
+
+
+        to get from navigation mode into edit mode:
+
+
+            i           enters edit mode, editing the selected task's summary.
+                        the cursor will start at the beginning of the summary.
+
+            a           as above, but the cursor will start at the end of the
+                        summary.
+
+            Shift-S     as above, but starts with the full text of the summary
+                        selected (for example, to replace the text).
+
+
+        i will assume you have read the README, but i will reiterate this
+        keybinding here, as it is important:
+
+
+            Ctrl-S      directs the backend to save a backup JSON file of the
+                        current state in the JSON data directory.
+
+                        as Windswept is still very early in its development,
+                        there is the possibility for data loss or general data
+                        inconsistency. as a precaution, this keybind is
+                        provided to take a snapshot of the current tree state.
+
+                        i recommend using this often. not because i have
+                        personally noticed data loss, but as a safeguard. i
+                        would rather use it and not need it than the other way
+                        around.
+
+
+        the following key bindings work in navigation mode:
+
+
+            K           selects the task one above the current selection. if
+            Up          more than one task is selected, all but the most
+                        recently selected task will be de-selected.
+
+            J           as above, but selects the task one below.
+            Down
+
+            Shift-K     moves the selection up by one inside of its parent
+            Shift-Up    task. note that this command also works with multiple
+                        tasks selected.
+
+            Shift-J     as above, but moves the selection down by one.
+            Shift-Down
+
+
+            - (Minus)   collapses/folds/hides the children of the currently
+                        selected tasks. if a selected task has no children, or
+                        is already collapsed, then the parent of that task will
+                        be collapsed.
+
+            = (Equal)   as above, but expands/unfolds/shows children of the
+                        selected tasks.
+
+            Shift-Minus collapses the grandchildren (the sub-sub-tasks) of the
+                        selected tasks. this may seem like a strange operation
+                        to have a key binding for.
+
+                        i find this particularly useful when arranging a
+                        collection of to-do items all with their own context
+                        and broken-down sub-task trees inside them, but wanting
+                        to get a big-picture view of the larger items.
+
+            Shift-Equal as above, but expands the grandchildren of the selected
+                        tasks.
+
+            Shift-      recursively collapses all child tasks of the selected
+                Ctrl-   tasks.
+                Minus
+
+            Shift-      recursively expands all child tasks of the selected
+                Ctrl-   tasks.
+                Equal
+
+
+            G           selects the task at the top of the window
+
+            Shift-G     selects the task at the bottom of the window
+
+            [           selects the selected task's previous sibling, or, if it
+                        has no previous sibling, selects its parent.
+
+            ]           as above, but next sibling. if no next sibling, selects
+                        the task immediately below.
+
+            Shift-[     selects the selected task's parent.
+
+            Shift-]     selects the selected task's last child.
+
+
+            Delete      deletes the selected tasks and all of their children
+
+            Ctrl-Delete deletes the selected tasks, and moves their children up
+                        to their parent tasks.
+
+
+        the following key bindings are used for manipulating the scope of the
+        shown tasks. this can be useful to "focus in" on a small part of the
+        tree to avoid being overwhelmed by ambitious plans:
+
+
+            /           treats the selected node as the new root node and
+                        updates the URL to match. no modifications to the tree
+                        are performed - only the scope of what is shown
+                        changes.
+
+            Shift-/     broaden the scope one tree level. effectively, this
+                        navigates to '../'.
+
+            Ctrl-/      resets the scope back to the root node.
+
+
+        in addition to the default list mode, there are also two different
+        kanban/board views.
+
+        in "plan" mode, all of the immediate children of the scope root are
+        displayed as columns, and their immediate children are displayed as
+        cards on the columns. this provides a quick way, for example, to assign
+        epics or large-scale tasks to releases or project phases.
+
+        there is also "status" mode, which displays the workspace's configured
+        statuses as columns and displays all of the leaf nodes under the
+        current scope root as cards. a "leaf node" is a task which has no
+        subtasks, which are known as a "leaves" because they are not themselves
+        branches.
+
+        since a task which has no subtasks is broken down as far as it can be,
+        the status kanban provides an interface to keep track of the most
+        granular work items. i find the status kanban useful day-to-day to know
+        exactly what the next thing i should be working on is.
+
+        in the upper right-hand corner, there is a small selector for choosing
+        between these three views. in addition, the following keyboard
+        shortcuts can be used in navigation mode:
+
+
+            1           switches to the "list" view
+
+            2           switches to the "plan" view
+
+            3           switches to the "status" view
+
+

@@ -1,0 +1,26 @@
+[package]
+name = "windswept"
+version = "0.1.0"
+authors = ["William Light <windswept@wrl.lhiaudio.com>"]
+edition = "2018"
+license-file = "LICENSE"
+
+[[bin]]
+name = "windswept-server"
+path = 'src/main.rs'
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4"
+env_logger = "0.7"
+structopt = "0.3"
+
+actix = "0.9"
+actix-web = "2"
+actix-web-actors = "2"
+actix-rt = "1"
+actix-files = "0.2"
+
+blake2 = "0.8"
+chrono = "0.4"

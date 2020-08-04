@@ -1,0 +1,33 @@
+{
+  "name": "windswept",
+  "author": {
+    "name": "William Light",
+    "email": "windswept@wrl.lhiaudio.com"
+  },
+  "license": "AGPL-3.0-only",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "autoprefixer": "^9.8.0",
+    "node-sass": "^4.14.1",
+    "rollup": "^1.20.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-scss": "^2.5.0",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "svelte": "^3.0.0",
+    "svelte-preprocess": "^3.7.4"
+  },
+  "dependencies": {
+    "remarkable": "^2.0.0",
+    "sirv-cli": "^0.4.4",
+    "spectre.css": "^0.5.8",
+    "svelte-icons": "^2.1.0"
+  }
+}

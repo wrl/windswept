@@ -1,0 +1,155 @@
+
+                                       /       |
+    ::                      /       \
+     :::                     \ \ / \ \ / / \ / \
+      ::::                /           \
+       :::::                       /           |
+        ::::::::::::::::::::::::::::::::::::
+           :::::::::::::::::::::::::::::::::::::
+
+
+        windswept is a project management and "todo list" system for people who
+        both have big ideas and then are chiefly responsible for getting those
+        big ideas done. this is in contrast to situations in which there are
+        separate people (or groups of people) responsible for planning (such as
+        a product owner or project manager) and doing (such as a software
+        developer, machinist, etc).
+
+        the concepts are largely based on what works for me (@wrl) personally,
+        but i have striven to keep the data model as simple as possible so that
+        folks who simply need little tweaks can do so without too much hassle.
+
+        this file is a cobbled-together half-stream-of-consciousness set of
+        notes about my goals and the core concepts. it will eventually be
+        refined into an FAQ of sorts.
+
+
+        windswept, at its core, is simply a hierarchical task list. any task
+        can have subtasks, and this is how a larger task (for example, "build a
+        desk") is broken down into smaller, manageable, *actionable* steps.
+
+        this document will refer to "supertasks" and "leaf tasks" frequently. a
+        supertask is any task that has subtasks, and a leaf task is a task that
+        has no subtasks.
+
+        the theory behind windswept is that, as tasks get broken down into
+        smaller and smaller pieces, the leaf nodes represent the most granular
+        quantity of actual actionable work. if they're not, then break them
+        down further.
+
+        the root node represents the "workspace". the workspace is where things
+        like the set of available statuses lives. eventually, there will be
+        support for multiple workspaces (for separating personal things from
+        work things, for example), but for now there's just the one. this
+        workspace is persisted as "windswept.json" in the JSON data directory.
+
+        tasks have two visible text fields, "summary" and "exposition". the
+        summary is, roughly, what the task seeks to accomplish. the short form
+        of the task, if you will. the exposition is additional information or
+        thoughts about the task. both fields are treated as markdown text. the
+        exposition field is hidden if it is blank, and can be edited by
+        selecting the task and pressing `shift-enter`. either field can be
+        edited by double-clicking as well.
+
+
+        as in many task management systems, tasks have a status.  by default,
+        the set of statuses is ["scheduled", "in progress", "done"], with an
+        additional "no status" representing status being unset. this set of
+        statuses can be changed by editing "windswept.json", but you should do
+        this with the backend service stopped. personally, my set of statuses
+        is ["this week", "today", "right now", "done"]. a status of "done" also
+        special in that it changes the appearance of the task (by greying it
+        out). eventually, this will be configurable in the workspace as well.
+        the current check (status == 'done') is just a hack.
+
+        status can be set in the list view by right-clicking on a task.
+
+        status is one of the places where a key property of windswept shows:
+        only leaf tasks have status. supertasks' status is simply an aggregate
+        of the status of their leaf tasks (no matter how deep in the hierarchy
+        they extend). you'll notice this when right-clicking on a supertask vs
+        on a leaf task - the leaf task simply has an indicator showing its
+        current status, whereas the supertask shows a percentage breakdown of
+        the status of all its leaf tasks.
+
+        
+        the list view is also a place to explore "scope". especially with a
+        number of projects in-flight, it can be overwhelming to have the full
+        context of everything in the workspace visible. to that end, it's
+        possible to view a specific task as the root and ignore everything
+        happening outside that branch. this operation updates the URL and does
+        not itself change the tree, though of course editing operations are
+        still persisted.
+
+        to scope down to a particular task, select the task (either via mouse
+        or keyboard) and press `/` (forward slash). to "scope out" one level
+        (like navigating to '../'), press `shift-/`. to scope out to the
+        workspace root, press ctrl-/.
+
+        since both the scope and the view (covered in the next section) are
+        represented in the URL, this means that it's possible to have different
+        scopes open in different tabs. and, since the backend websocket
+        connection transparently syncronises the whole workspace between
+        connected clients, all the changes will be transparently reflected
+        everywhere else.
+
+        i generally have one pinned tab scoped to the *actual* project i'm
+        working on (be it client work or otherwise), and then a tab next to it
+        scoped to windswept, so that if i hit a bug or something looks off, i
+        can quickly file myself a windswept task and deal with it later.
+
+        you can also quickly scope down by alt-clicking on a task or on a
+        column header in the "plan" view.
+
+
+        in addition to the "list" view, windswept also has two kanban/board
+        views, both with different properties. the first we'll cover is "plan",
+        which i find similar to trello.
+
+        "plan" shows you the current scope root. the immediate children of the
+        root are displayed as columns, and their respective immediate children
+        are displayed as cards. the cards and columns can both be rearranged -
+        cards both in ordering inside of a column, and columns relative to one
+        another. eventually there will be a gesture for turning a card into a
+        column and vice versa, but that's not there yet.
+
+        i find plan view useful for deciding what larger phase of a project i'm
+        going to do work in. for example - i have a supertask called, simply,
+        "windswept", and tasks therein for the different versions i want to
+        ship. ["pre-dev questions", "backlog", "pre-0.1", "0.1", "0.2"]. plan
+        view shows me each of those as a column, and i can divvy up the
+        features i want to ship per release.
+
+
+        possibly the most important board (for me, at least) is the "status"
+        board. the status board dispenses with hierarchy entirely. it shows one
+        column per status, and the cards are all of the in-scope leaf tasks
+        with the respective status set.
+
+        this comes back to the above theory that the leaf tasks are where the
+        actual day-to-day work lives. when i'm sitting down to actually do
+        work, i don't really need to think about the vast grandeur of my
+        carefully-laid task hierarchy, i just need to know what to do *right*
+        *now*.
+
+        my workflow generally involves starting the week in list view, picking
+        a set of things i'm going to do that week, and using right-click to
+        assign those things the "this week" status. i'll return to list mode
+        during the week if i need to break a task down further (which i often
+        do in the moment), but in general i stay in status view.
+
+        to limit the amount of information i have in status view, i generally
+        leave the "done" column collapsed, so i'm just looking at "this week",
+        "today", and "right now". if i'm having a particularly unfocused day,
+        i'll collapse "this week" too.
+
+        the collapse status of the columns is persisted in the workspace,
+        except for the "no status" column, which is local state and defaults to
+        collapsed. eventually this will also be persisted.
+
+
+        this document is already quite long and a decent read, so i'll go ahead
+        and wrap it up here. i highly recommend checking the "keys" file to get
+        a feel for the keybinds and interaction model.
+
+        -w

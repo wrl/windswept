@@ -1,0 +1,29 @@
+
+                                       /       |
+    ::                      /       \
+     :::                   \\ / \ // \ / \\ / \\
+      ::::                /           \
+       :::::                       /           |
+        ::::::::::::::::::::::::::::::::::::
+           :::::::::::::::::::::::::::::::::::::
+
+
+        the future plans here are largely predicated on whether folks find this
+        useful. sure, there's some UI/UX shoring up to do. sure, there's some
+        other creature comforts that all the other task managers have. but, if
+        people don't really vibe with the general concepts (outlined in
+        "background.txt"), then i'll just keep developing this to suit my own
+        needs, and have the AGPL single-user version public at some point.
+
+        if it's the sort of thing that people are vibing with, then i'll
+        consider adding on some of those niceties (multi-user, user task
+        assignments, more "enterprisey" shit) and doing a little SaaS version.
+        i think that, irrespective of whether i do or not, i'll still have the
+        AGPL version public but without the enterprise features. i think it's
+        important that if people want to own their data then they should be
+        able to do so.
+
+        so, hey, keep me in the loop. if you're reading this, you're a friend,
+        so you know how to get in touch.
+
+        -w
