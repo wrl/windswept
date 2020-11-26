@@ -527,7 +527,7 @@
 					return;
 
 				task.update(t => t._edit_status = ['exposition']);
-			} else if (task.has_children())
+			} else if (task && task.has_children())
 				create_child_task(task);
 			else
 				create_sibling_task('after');
